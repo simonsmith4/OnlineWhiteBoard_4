@@ -25,6 +25,11 @@ namespace OnlineWhiteBoard_4.SignalR
 
         }
 
+        public void SendCursorMove(string coords, string sessionId, string groupName, string name)
+        {
+            Clients.Group(groupName).HandleCursorMove(coords, sessionId, name);
+        }
+
         public void SendDraw(string drawObject, string sessionId, string groupName,string name)
         {
             Clients.Group(groupName).HandleDraw(drawObject, sessionId, name);

@@ -8,7 +8,17 @@
         overflow: auto;
         scrollbar-base-color: #ffeaff;
     }
+    .canvas { position: absolute; top: 0 ; left: 0}
     #whiteBoard
+    {
+        border: 1px dashed #CCCCCC;
+        margin: 5px;
+        border-style: dotted;
+        border-width: 1px;
+        background-color: #FFFFFF;
+        vertical-align: top;
+    }
+    #cursorBoard
     {
         border: 1px dashed #CCCCCC;
         margin: 5px;
@@ -56,7 +66,8 @@
                 <tr>
                     <td style="vertical-align: top;">
                         <div id="container" style="width: 800px; height: 420px">
-                            <canvas id="whiteBoard"></canvas>
+                            <canvas class="canvas" id="whiteBoard"></canvas>
+                            <!--<canvas class="canvas" id="cursorBoard"></canvas>-->
                             <div id="status">
                             </div>
                         </div>
@@ -91,11 +102,12 @@
             </div>
             <textarea rows="2" cols="25" id="txtMessage" style="width: 220px"></textarea>
             <input type="button" id="btnSend" value="Send" />
-            
+            <input type="text" id="xcoord" value="" />
+            <input type="text" id="ycoord" value="" />
             <div id="divStatus">
             </div>            
             <p>
-                &copy; @DateTime.Now.Year - Whiteboard Online using HTML5 and SignalR by Alvin George
+                &copy; @DateTime.Now.Year - Whiteboard Online using HTML5 and SignalR
             </p>
         </td>
     </tr>

@@ -348,6 +348,13 @@ tools.pencil = function () {
             DrawIt(drawObject, true);
             drawObjectsCollection.push(drawObject);
         }
+
+        var message = {
+            x: ev._x,
+            y: ev._y
+        }
+        var msg = JSON.stringify(message);
+        whiteboardHub.server.sendCursorMove(msg, $("#sessinId").val(), $("#groupName").val(), $("#userName").val());
     };
 
     // This is called when you release the mouse button.
@@ -652,9 +659,30 @@ function JoinHub()
                 if (name.length > 0) {
                      $("#userName").val(name);
                   
-               
+                     whiteboardHub = $.connection.whiteboardHub;
 
-    whiteboardHub = $.connection.whiteboardHub;
+                     whiteboardHub.client.handleCursorMove = function (coords, sessnId, name) {
+                         var xys = jQuery.parseJSON(coords)
+                         var xtxt = document.getElementById("xcoord");
+                         var ytxt = document.getElementById("ycoord");
+
+                         xys.y = xys.y + 100;
+
+                         xtxt.value = xys.x;
+                         ytxt.value = xys.y;
+                         //var canv = document.getElementById("canvas");
+                         //var ctx = canvas.getContext("2d");
+
+                         //canv2 = document.getElementById("cursorBoard");
+                         //cont2 = canv2.getContext("2d");
+                         //cont2.clearRect(0, 0, canvas.width, canvas.height);
+                         //cont2.beginPath();
+                         //cont2.arc(xys.x, xys.y, 10, 0, 2 * Math.PI);
+                         //cont2.stroke;
+                         //cont2.Completed();
+                         //updatecanvas();
+                     }
+
     whiteboardHub.client.handleDraw = function (message, sessnId, name) {
         var sessId = $('#sessinId').val();
         if (sessId != sessnId) {
